@@ -1,11 +1,6 @@
-class Book < ApplicationRecord
+class BookComment < ApplicationRecord
   belongs_to :user
-  has_many :favorites, dependent: :destroy
-  has_many :book_comments, dependent: :destroy
-  has_one_attached :profile_image
-  
-  validates :title, presence: true
-  validates :body, presence: true,length:{maximum:200}
+  belongs_to :book
   
   def get_profile_image(width, height)
       unless profile_image.attached?
@@ -13,9 +8,5 @@ class Book < ApplicationRecord
         profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
       end
       profile_image.variant(resize_to_limit: [width, height]).processed
-  end
-  
-  def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
   end
 end

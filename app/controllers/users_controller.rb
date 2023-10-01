@@ -3,16 +3,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @following_users = @user.following_users
+    @follower_users = @user.follower_users
     @books = @user.books
     @book = Book.new
   end
 
   def index
     @users = User.all
+    @user = current_user
     @book = Book.new
-    @user = User.find(params[:user_id])
-    @following_users = @user.following_users
-    @follower_users = @user.follower_usres
   end
 
   def edit

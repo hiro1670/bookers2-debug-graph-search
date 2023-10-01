@@ -5,10 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :books, dependent: :destroy
+  
   has_many :favorites, dependent: :destroy
+  
   has_many :book_comments, dependent: :destroy
-  has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  
   has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   
   has_many :following_users, through: :followers, source: :followed
   has_many :follower_users, through: :followeds, source: :follower
@@ -18,7 +21,21 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction,    length: { maximum: 50 }
 
+  def is_followed_by?(user)
+    reverse_of_relationships.find_by(following_id: user.id).present
+  end
   
+  def follow(user_id)
+    followers.create(followed_id: user_id)
+  end
+  
+  def unfollow(user_id)
+    followers.find_by(followed_id: user_id).destroy
+  end
+  
+  def following?(user)
+    following_users.include?(user)
+  end
   
   def get_profile_image(width, height)
       unless profile_image.attached?

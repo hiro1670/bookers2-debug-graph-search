@@ -23,6 +23,7 @@
           <th></th>
           <th>Title</th>
           <th>Option</th>
+          <th>Tag</th>
         </tr>
         <tr>
           <td><%= image_tag book.user.get_profile_image(100,100) %></td>
@@ -32,6 +33,7 @@
             <% end %>
           </td>
           <td><%= book.body %></td>
+          <td><%= book.tag %></td>
         </tr>
       <% end %>
     </tbody>

@@ -11,7 +11,16 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <%= render 'layouts/search' %>
+    <div class="container">
+      <div class="row justify-content-around">
+        <div class="col-5">
+          <%= render 'layouts/search' %>
+        </div>
+        <div class="col-4">
+          <%= render 'layouts/tag_search' %>
+        </div>
+      </div>
+    </div>
     <main>
       <%= yield %>
     </main>

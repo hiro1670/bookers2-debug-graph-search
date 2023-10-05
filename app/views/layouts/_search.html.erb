@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= form_with url: tagsearches_search_path, local: true, method: :get do |f| %>
+  <%= form_with url: search_path, local: true, method: :get do |f| %>
     <%= f.text_field :word %>
     <%= f.select :range, options_for_select([['User'], ['Book']]) %>
     <%= f.select :search, options_for_select([["完全一致", "perfect_match"], ["前方一致", "before"], ["後方一致", "back"], ["部分一致", "part"]]) %>

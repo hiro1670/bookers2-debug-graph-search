@@ -6,8 +6,8 @@
   </p>
 <% else %>
   <p>
-  <%= link_to book_favorites_path(book), method: :post, remote: true do %>
-    ♥<%= book.favorites.count %>
+  <%= link_to book_favorites_path(book.id), method: :post, remote: true do %>
+    ♡<%= book.favorites.count %>
   <% end %>
   </p>
 <% end %>

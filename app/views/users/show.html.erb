@@ -127,6 +127,17 @@
               });
             });
           </script>
+          
+          <%= form_with url: user_search_path(@user), method: :get, local: false do |f|  %>
+            <%= f.date_field :created_at %>
+            <%= f.submit "検索" %>
+          <% end %>
+          
+          <div id="search_result">
+            <% if @search_book.present? %>
+              <%= render 'search', books: @books %>
+            <% end %>
+          </div>
     </div>
   </div>
 </div>
